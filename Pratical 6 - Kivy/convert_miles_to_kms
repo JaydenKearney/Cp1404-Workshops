@@ -1,3 +1,12 @@
+<Label>:
+    canvas.before:
+        Color:
+            rgba: 1, 1, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    color: 1, 1, 1, 1
+
 BoxLayout:
     orientation: 'vertical'
     BoxLayout:
@@ -7,6 +16,7 @@ BoxLayout:
             text: '0'
             text_size: 28
             multiline: False
+            on_text: app.miles_to_kms()
         BoxLayout:
             orientation: 'vertical'
             Button:
@@ -17,9 +27,7 @@ BoxLayout:
                 id: button_down
                 text: 'Down'
                 on_press: app.handle_increment(-1)
-    Button:
-        id: button_calculate
-        text: 'Convert Miles to Kms'
-
     Label:
         id: output_label
+        text: ''
+        color: (0, 0, 0, 1)
