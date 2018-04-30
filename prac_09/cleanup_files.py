@@ -50,10 +50,24 @@ def main():
 def get_fixed_filename(filename):
     """Return a 'fixed' version of filename."""
     # First, replace the spaces and .TXT (the easy part)
-    filename = filename.replace(" ", "_").replace(".TXT", ".txt")
+    name = ""
+    for i, letter in enumerate(filename):
+        letter_check_lower = letter.islower()
+        letter_check_upper = letter.isupper()
+        last_letter = len(filename) - 1
 
-    new_name = ""
-    # TODO: step-by-step, consider the problem cases and solve them
+        if i is not last_letter:
+            next_letter = i+1
+            name_check = filename[next_letter].isupper()
+        else:
+            name_check = False
+        name = name + letter
+        if letter_check_lower and name_check:
+            name = name + "_"
+        elif letter_check_upper and name_check:
+            name = name + "_"
+
+    new_name = name.replace(" ", "_").replace(".TXT", ".txt")
 
     return new_name
 
