@@ -16,43 +16,48 @@ def main():
     print(os.listdir('.'))
 
     # make a new directory
-    # os.mkdir('temp')
+
     walk_file = ".."
-    count = 0
     # loop through each file in the (original) directory
     os.chdir(walk_file)  # .. means "up" one directory
     for dir_name, subdir_list, file_list in os.walk('.'):
-        # print("In", dir_name)
+        print("In", dir_name)
         # print("\tcontains subdirectories:", subdir_list)
         # print("\tand files:", file_list)
         if dir_name == '.':
-            print("Top dir")
+            continue
         # elif dir_name == ".\Christmas\temp":
         #     print("Temp file")
         else:
-            print(file_list)
+            # print(os.listdir('.'))
+            # print(file_list)
+            directory_name = dir_name.split("\\")
+            # print(directory_name[1])
+            os.chdir(str(directory_name[1]))
             for filename in file_list:
                 # ignore directories, just process files
                 if not os.path.isdir(filename):
+                    # print(filename)
+                    # print(os.getcwd())
                     new_name = get_fixed_filename(filename)
-                    print(new_name)
+                    # print(new_name)
 
-            # NOTE: These options won't just work...
-            # they show you ways of renaming and moving files,
-            # but you need to have valid filenames. You can't make a file with
-            # a blank name, and on Windows you can't have files with the same
-            # characters but different case (e.g. a.TXT and A.txt)
-            # So, you need to get valid filenames before you can use these.
+                    # NOTE: These options won't just work...
+                    # they show you ways of renaming and moving files,
+                    # but you need to have valid filenames. You can't make a file with
+                    # a blank name, and on Windows you can't have files with the same
+                    # characters but different case (e.g. a.TXT and A.txt)
+                    # So, you need to get valid filenames before you can use these.
 
-            # Option 1: rename file to new name - in place
+                    # Option 1: rename file to new name - in place
                     os.rename(filename, new_name)
 
-            # Option 2: move file to new place, with new name
-            # shutil.move(filename, 'temp/' + new_name)
+                    # Option 2: move file to new place, with new name
+                    # shutil.move(filename, 'temp/' + new_name)
 
-            # Processing subdirectories using os.walk()
+                    # Processing subdirectories using os.walk()
+        os.chdir(walk_file)
 
-        walk_file = '.'
 
 
 
